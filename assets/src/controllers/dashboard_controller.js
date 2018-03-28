@@ -9,8 +9,11 @@ export default class extends Controller {
   }
 
   connect() {
-    const impressionsByDay = JSON.parse(this.element.dataset.impressionsByDay);
-    const clicksByDay = JSON.parse(this.element.dataset.clicksByDay);
+    console.log("DATA");
+    console.log(this.element.dataset);
+    const impressionsByDay = [1, 2, 3, 5, 1, 2, 3, 5];
+
+    const clicksByDay = [1, 4, 5, 6, 1, 2, 3, 5];
 
     this.loadTrafficImpressionsChart(impressionsByDay);
     this.loadTrafficClicksChart(clicksByDay);
@@ -41,6 +44,9 @@ export default class extends Controller {
     };
 
     const labels = _.map(_.keys(impressionsByDay), this.strToDate);
+    this.filterValues = labels;
+    console.log("labels");
+    console.log(labels);
 
     const data = {
       labels,

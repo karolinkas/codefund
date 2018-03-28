@@ -8,6 +8,10 @@
      data-controller="dashboard"
      data-impressions-by-day='<%= @impressions_by_day %>'
      data-clicks-by-day='<%= @clicks_by_day %>'>
+     <label>From</label>
+      <select>      
+      </select>
+
   <div class="row">
     <div class="col-md-6">
       <div class="card">
