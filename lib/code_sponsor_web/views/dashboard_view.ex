@@ -6,4 +6,9 @@ defmodule CodeSponsorWeb.DashboardView do
     {:ok, formatted_end_date}   = end_date   |> Timex.format("%b %d, %Y", :strftime)
     "#{formatted_start_date} to #{formatted_end_date}"
   end
+
+  def date_string(date) do
+    {:ok, formatted_date} = date |> Timex.format("%b %d, %Y", :strftime)
+    "#{formatted_date}"
+  end
 end
