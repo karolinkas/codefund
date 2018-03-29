@@ -148,6 +148,10 @@ defmodule CodeSponsor.Stats.Clicks do
     ) |> to_date_map()
   end
 
+  def get_date_range(start_date, end_date) do
+    start_date + end_date
+  end
+
   defp to_date_map(query) do
     query
     |> Repo.all

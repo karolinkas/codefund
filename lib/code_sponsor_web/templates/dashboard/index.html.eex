@@ -3,15 +3,12 @@
   <li class="breadcrumb-item">Home</li>
   <li class="breadcrumb-item active">Dashboard</li>
 </ol>
-
 <div class="container-fluid"
      data-controller="dashboard"
      data-impressions-by-day='<%= @impressions_by_day %>'
      data-clicks-by-day='<%= @clicks_by_day %>'>
-     <label>From</label>
-      <select>      
-      </select>
-
+     data-days='<%= @days %>'>
+  <div data-target="dashboard.days"><%= @days %></div>
   <div class="row">
     <div class="col-md-6">
       <div class="card">
@@ -19,6 +16,8 @@
           <div class="row">
             <div class="col-sm-12">
               <h4 class="card-title mb-0">Impressions</h4>
+              <div data-target="dashboard.start"><%= @start_date %></div>
+              <div data-target="dashboard.end"><%= @end_date %></div>
               <div class="small text-muted">
                 <%= pretty_date_range(@start_date, @end_date) %>
               </div>

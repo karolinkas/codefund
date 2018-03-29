@@ -5,7 +5,13 @@ import Chart from "chart.js";
 
 export default class extends Controller {
   static get targets() {
-    return ["trafficImpressionsChart", "trafficClicksChart"];
+    return [
+      "trafficImpressionsChart",
+      "trafficClicksChart",
+      "days",
+      "start",
+      "end"
+    ];
   }
 
   connect() {
@@ -19,10 +25,28 @@ export default class extends Controller {
     this.loadTrafficClicksChart(clicksByDay);
 
     console.log("Loaded dashboard");
+    // const elementWithDays = this.daysTarget;
+
+    const start = new Date(this.startTarget.innerHTML);
+    const end = new Date(this.endTarget.innerHTML);
+    console.log(this.createDateRange(start, end));
   }
 
   strToDate(str) {
-    return moment(str);
+    this.date = moment(str);
+    return this.date;
+  }
+
+  createDateRange(start, end) {
+    this.array = [];
+    const date = new Date(start);
+
+    while (date <= end) {
+      this.array.push(new Date(date));
+      date.setDate(date.getDate() + 1);
+    }
+
+    return this.array;
   }
 
   loadTrafficImpressionsChart(impressionsByDay) {
