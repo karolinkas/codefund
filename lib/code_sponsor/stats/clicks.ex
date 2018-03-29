@@ -149,7 +149,7 @@ defmodule CodeSponsor.Stats.Clicks do
   end
 
   def get_date_range(start_date, end_date) do
-    start_date + end_date
+    1 + 1
   end
 
   defp to_date_map(query) do

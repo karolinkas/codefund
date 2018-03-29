@@ -2,21 +2,21 @@ import { Controller } from "stimulus";
 import _ from "lodash";
 import moment from "moment";
 import Chart from "chart.js";
+import daterangepicker from "bootstrap-daterangepicker";
+import $ from "jquery/dist/jquery";
 
 export default class extends Controller {
   static get targets() {
     return [
       "trafficImpressionsChart",
       "trafficClicksChart",
-      "days",
       "start",
-      "end"
+      "end",
+      "dateRange"
     ];
   }
 
   connect() {
-    console.log("DATA");
-    console.log(this.element.dataset);
     const impressionsByDay = [1, 2, 3, 5, 1, 2, 3, 5];
 
     const clicksByDay = [1, 4, 5, 6, 1, 2, 3, 5];
@@ -24,29 +24,13 @@ export default class extends Controller {
     this.loadTrafficImpressionsChart(impressionsByDay);
     this.loadTrafficClicksChart(clicksByDay);
 
-    console.log("Loaded dashboard");
-    // const elementWithDays = this.daysTarget;
-
-    const start = new Date(this.startTarget.innerHTML);
-    const end = new Date(this.endTarget.innerHTML);
-    console.log(this.createDateRange(start, end));
+    const dataFromDatepicker = this.dateRangeTarget.dataset;
+    $(this.dateRangeTarget).daterangepicker();
+    console.log(dataFromDatepicker);
   }
 
   strToDate(str) {
-    this.date = moment(str);
-    return this.date;
-  }
-
-  createDateRange(start, end) {
-    this.array = [];
-    const date = new Date(start);
-
-    while (date <= end) {
-      this.array.push(new Date(date));
-      date.setDate(date.getDate() + 1);
-    }
-
-    return this.array;
+    return moment(str);
   }
 
   loadTrafficImpressionsChart(impressionsByDay) {
@@ -69,8 +53,6 @@ export default class extends Controller {
 
     const labels = _.map(_.keys(impressionsByDay), this.strToDate);
     this.filterValues = labels;
-    console.log("labels");
-    console.log(labels);
 
     const data = {
       labels,

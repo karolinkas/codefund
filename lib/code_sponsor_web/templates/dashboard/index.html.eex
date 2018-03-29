@@ -7,8 +7,19 @@
      data-controller="dashboard"
      data-impressions-by-day='<%= @impressions_by_day %>'
      data-clicks-by-day='<%= @clicks_by_day %>'>
-     data-days='<%= @days %>'>
-  <div data-target="dashboard.days"><%= @days %></div>
+<form action="#" method="get" class="sidebar-form">
+  <div class="input-group">
+    <span class="input-group-btn">
+      <span class="btn btn-flat"><i class="fa fa-calendar"></i></span>
+    </span>
+    <input type="text" data-target="dashboard.dateRange"
+            name="daterange"
+            data-start-date="<%= @start_date %>"
+            data-end-date="<%= @end_date %>"
+            class="form-control"
+            style="color: #999;" />
+  </div>
+  </form>
   <div class="row">
     <div class="col-md-6">
       <div class="card">
@@ -16,8 +27,6 @@
           <div class="row">
             <div class="col-sm-12">
               <h4 class="card-title mb-0">Impressions</h4>
-              <div data-target="dashboard.start"><%= @start_date %></div>
-              <div data-target="dashboard.end"><%= @end_date %></div>
               <div class="small text-muted">
                 <%= pretty_date_range(@start_date, @end_date) %>
               </div>

@@ -3,22 +3,18 @@ defmodule CodeSponsorWeb.DashboardController do
 
   def index(conn, _params) do
 
-    require Logger
-
     current_user = conn.assigns.current_user
     end_date     = ~D[2018-03-31]
     start_date   = ~D[2018-03-01]
 
     impressions_by_day = CodeSponsor.Stats.Impressions.count_by_day(current_user, start_date, end_date)
     clicks_by_day      = CodeSponsor.Stats.Clicks.count_by_day(current_user, start_date, end_date)
-    days = CodeSponsor.Stats.Clicks.get_date_range(start_date, end_date)
     total_impressions  = Enum.map(impressions_by_day, fn {_, v} -> v end) |> Enum.sum
     total_clicks       = Enum.map(clicks_by_day, fn {_, v} -> v end) |> Enum.sum
 
     render(conn, "index.html",
       start_date: start_date,
       end_date: end_date,
-      days: days,
       impressions_by_day: Poison.encode!(impressions_by_day),
       clicks_by_day: Poison.encode!(clicks_by_day),
       total_impressions: total_impressions,
