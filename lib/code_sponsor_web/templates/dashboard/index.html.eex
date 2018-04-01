@@ -6,18 +6,25 @@
 <div class="container-fluid"
      data-controller="dashboard"
      data-impressions-by-day='<%= @impressions_by_day %>'
-     data-clicks-by-day='<%= @clicks_by_day %>'>
+     data-clicks-by-day='<%= @clicks_by_day %>'
+     data-start-date="<%= @start_date %>"
+     data-end-date="<%= @end_date %>">
 
-<form action="#" method="get">
-  <div class="daterangepicker">
-    <input type="text" data-target="dashboard.dateRange"
-            name="daterange"
-            data-start-date="<%= date_string(@start_date) %>"
-            data-end-date="<%= date_string(@end_date) %>"
-            class="form-control dates"
-            style="color: #999;" />
+  <div class="card">
+    <div class="card-body">
+      <fieldset class="form-group">
+        <div class="input-group">
+          <span class="input-group-prepend">
+            <span class="input-group-text"><i class="icon-calendar"></i></span>
+          </span>
+          <input data-target="dashboard.dateRange" name="daterange" class="form-control" type="text"
+            >
+        </div>
+      </fieldset>
+    </div>
   </div>
-  </form>
+
+
   <div class="row">
     <div class="col-md-6">
       <div class="card">

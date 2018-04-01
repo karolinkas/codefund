@@ -3,7 +3,11 @@ import _ from "lodash";
 import moment from "moment";
 import Chart from "chart.js";
 import daterangepicker from "bootstrap-daterangepicker";
-import $ from "jquery/dist/jquery";
+// import $ from "jquery/dist/jquery";
+
+import jQuery from "detached-jquery-1.10.2";
+
+const $ = jQuery.getJQuery();
 
 export default class extends Controller {
   static get targets() {
@@ -23,26 +27,27 @@ export default class extends Controller {
 
     this.loadTrafficImpressionsChart(impressionsByDay);
     this.loadTrafficClicksChart(clicksByDay);
+    this.initDatePicker();
+  }
 
+  initDatePicker() {
     const dataFromDatepicker = this.dateRangeTarget.dataset;
-    $(this.dateRangeTarget).daterangepicker({
-      ranges: {
-        Today: [moment(), moment()],
-        Yesterday: [moment().subtract(1, "days"), moment().subtract(1, "days")],
-        "Last 7 Days": [moment().subtract(6, "days"), moment()],
-        "Last 30 Days": [moment().subtract(29, "days"), moment()],
-        "This Month": [moment().startOf("month"), moment().endOf("month")],
-        "Last Month": [
-          moment()
-            .subtract(1, "month")
-            .startOf("month"),
-          moment()
-            .subtract(1, "month")
-            .endOf("month")
-        ]
+
+    const picker = $(this.dateRangeTarget);
+    picker.daterangepicker(
+      {
+        startDate: moment(dataFromDatepicker.startDate),
+        endDate: moment(dataFromDatepicker.endDate)
+      },
+      (start, end) => {
+        console.log(start, end);
       }
+    );
+    console.log(picker.data());
+
+    picker.on("apply.daterangepicker", (ev, picker) => {
+      console.log("APPLYING");
     });
-    console.log(dataFromDatepicker);
   }
 
   strToDate(str) {

@@ -30,7 +30,7 @@
   <link href="<%= static_path(@conn, "/home/css/bootstrap.min.css") %>" rel="stylesheet" type="text/css">
   <!-- Daterangepicker CSS -->
   <link href="<%= static_path(@conn, "/home/css/daterangepicker.css") %>" rel="stylesheet" type="text/css">
-  
+ 
   <!-- Font Awesome CSS -->
   <link href="<%= static_path(@conn, "/home/css/font-awesome.min.css") %>" rel="stylesheet" type="text/css">
   
